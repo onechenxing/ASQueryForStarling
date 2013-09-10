@@ -1,0 +1,5 @@
+﻿【ASQueryForStarling 测试项目】
+
+---------------- 使用 ------------------
+此项目为FlashBuilder项目，导入FlashBuilder使用。
+需同时导入ASQueryForStarling库项目   
