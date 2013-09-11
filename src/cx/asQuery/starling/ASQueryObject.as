@@ -566,6 +566,7 @@ package cx.asQuery.starling
 			//置空
 			_list = null;
 			_root = null;
+			_selector = null;
 		}
 		
 		/**

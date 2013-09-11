@@ -40,7 +40,7 @@ package
 			
 			//初始化Starling
 			Starling.handleLostContext = true;
-			var starling:Starling = new Starling(ASQueryTest,stage);
+			var starling:Starling = new Starling(ASQueryTest1,stage);
 			starling.start();
 			
 			//显示上方文本

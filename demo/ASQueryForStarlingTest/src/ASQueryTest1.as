@@ -12,12 +12,13 @@ package
 	
 	/**
 	 * ASQuery测试类  
+	 * Demo说明：构建两个显示对象，设定基本属性，并让他们可以拖动。
 	 * @author 翼翔天外
 	 * @E-mail onechenxing@163.com
 	 */
-	public class ASQueryTest extends Sprite
+	public class ASQueryTest1 extends Sprite
 	{
-		public function ASQueryTest()
+		public function ASQueryTest1()
 		{
 			//添初始化
 			$(this).ready(init);
@@ -74,8 +75,8 @@ package
 					beginPoint.x = touch.globalX;
 					beginPoint.y = touch.globalY;
 				});
-			//输出
-			trace($(this).find(Sprite));
+			//输出程序中的所有Sprite看看
+			trace($(Sprite));
 		}
 	}
 }
