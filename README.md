@@ -93,16 +93,23 @@ API生成文档在doc目录
 ---------------- 注意事项 ----------------
 
 1.选择器通过遍历所有子集可能会导致性能问题。如果只要遍历一层子集可以通过优化方式调用：
+
 	$("ball",ball的父容器,true);
 	或	
 	$(ball的父容器).find("ball",true);
+	
 2.筛选器使用过于频繁，会生成过多的ASQueryObject对象，如果同一筛选器要使用很多次，通过把选择器缓存为变量，可节约筛选开销：
+
 	var $ball:ASQueryObject = $("ball");
 	$ball.attr("x",100);
 	$ball.click(clickHandler);
+	
 3.上面几条只是介绍可以优化的地方，不用一开始就用优化的方式开发，这样就失去ASQuery的灵活性。
+
 4.在模块较多的项目建议选择操作都这样使用（不会使层级的相互影响）：
+
 	$(this).find("ball",true).xx().xx();
+	
 	
 ---------------- 后续计划 ----------------
 
@@ -116,6 +123,7 @@ API生成文档在doc目录
 
 github:
 https://github.com/onechenxing/ASQueryForStarling
+
 google code:
 http://code.google.com/p/as-query-for-starling/
 
