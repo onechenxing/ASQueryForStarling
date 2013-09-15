@@ -119,14 +119,6 @@ API生成文档在doc目录
 添加更多的选择器
 增加可插件式扩展
 
----------------- 项目托管 ----------------
-
-github:
-https://github.com/onechenxing/ASQueryForStarling
-
-google code:
-http://code.google.com/p/as-query-for-starling/
-
 ---------------- 联系方式 ----------------
 
 提交bug或贡献代码请发邮箱：
