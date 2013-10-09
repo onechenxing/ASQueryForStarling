@@ -111,13 +111,10 @@ package cx.asQuery.starling
 				}
 				else
 				{
-					item.addEventListener(Event.ADDED_TO_STAGE,function(e:Event):void
+					$(item).bind(Event.ADDED_TO_STAGE,function(e:Event):void
 					{
-						if(item.hasEventListener(Event.ADDED_TO_STAGE))
-						{
-							item.removeEventListener(Event.ADDED_TO_STAGE,arguments.callee);
-						}
-						fun.apply(item);
+						$(item).unbind(Event.ADDED_TO_STAGE,arguments.callee);
+						fun.call(item);
 					});
 				}
 			});
@@ -256,6 +253,23 @@ package cx.asQuery.starling
 			return this;
 		}
 		
+
+		//bindOnce暂未实现，现阶段问题：如果实现，不能简单的包装，需要用户可以移除的它，
+		//那么势必要和ASQuery原则的框架一样做一个监听的map映射
+		//这样就会破坏当前只是转发starling的监听的优势，导致被监听会被框架引用，容易引发释放问题
+		//建议暂时用bind之后再unbind来实现只有一次的监听
+//		/**
+//		 * 绑定只执行一次的事件监听 
+//		 * @param type
+//		 * @param handler
+//		 * @return 
+//		 * 
+//		 */
+//		public function bindOnce(type:String,handler:Function):ASQueryObject
+//		{
+//			return this;
+//		}
+		
 		/**
 		 * 触发事件 
 		 * @param event		要触发的事件
@@ -329,13 +343,13 @@ package cx.asQuery.starling
 			{
 				if(item is Button)
 				{
-					item.addEventListener(Event.TRIGGERED,handler);
+					$(item).bind(Event.TRIGGERED,handler);
 				}
 				else
 				{
 					//记录点击开始位置，用于判定是否是点击非移动
 					var clickPoint:Point;
-					item.addEventListener(TouchEvent.TOUCH,function(event:TouchEvent):void
+					$(item).bind(TouchEvent.TOUCH,function(event:TouchEvent):void
 					{
 						var touch:Touch = event.getTouch(item);
 						if(touch)
@@ -383,7 +397,7 @@ package cx.asQuery.starling
 		{
 			all(function(item:DisplayObject):void
 			{
-				item.addEventListener(TouchEvent.TOUCH,function(event:TouchEvent):void
+				$(item).bind(TouchEvent.TOUCH,function(event:TouchEvent):void
 				{
 					var touch:Touch = event.getTouch(DisplayObject(event.currentTarget));
 					if(touch && touch.phase == TouchPhase.BEGAN)
@@ -405,7 +419,7 @@ package cx.asQuery.starling
 		{
 			all(function(item:DisplayObject):void
 			{
-				item.addEventListener(TouchEvent.TOUCH,function(event:TouchEvent):void
+				$(item).bind(TouchEvent.TOUCH,function(event:TouchEvent):void
 				{
 					var touch:Touch = event.getTouch(DisplayObject(event.currentTarget));
 					if(touch && touch.phase == TouchPhase.ENDED)
@@ -427,7 +441,7 @@ package cx.asQuery.starling
 		{
 			all(function(item:DisplayObject):void
 			{
-				item.addEventListener(TouchEvent.TOUCH,function(event:TouchEvent):void
+				$(item).bind(TouchEvent.TOUCH,function(event:TouchEvent):void
 				{
 					var touch:Touch = event.getTouch(DisplayObject(event.currentTarget));
 					if(touch && touch.phase == TouchPhase.HOVER)
@@ -449,7 +463,7 @@ package cx.asQuery.starling
 		{
 			all(function(item:DisplayObject):void
 			{
-				item.addEventListener(TouchEvent.TOUCH,function(event:TouchEvent):void
+				$(item).bind(TouchEvent.TOUCH,function(event:TouchEvent):void
 				{
 					var touch:Touch = event.getTouch(DisplayObject(event.currentTarget));
 					if(touch && touch.phase == TouchPhase.MOVED)
