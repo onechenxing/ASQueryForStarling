@@ -1,2 +1,10 @@
+2013-11-13:
+1.提供缓动动画支持：
+	缓动的使用方法：tween(duration:Number, vars:Object)
+2.添加新的辅助方法：
+	设置位置：setPosition(x:Number,y:Number)
+	改变位置：addPosition(x:Number,y:Number)
+	设置旋转角度：setRotation(r:Number)
+
 2013-9-17
 1.规范内部使用到的事件监听的地方统一通过bind和unbind来操作，即不直接使用starling监听函数。

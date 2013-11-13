@@ -3,6 +3,7 @@ package cx.asQuery.starling
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
+	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -561,26 +562,49 @@ package cx.asQuery.starling
 		}
 		
 		/**
-		 * 清理所有资源，并释放
-		 * 注意：贴图和bitmapData不会自动释放，如果释放操作写在显示对象的dispose方法里面则会调用
-		 * 此方法无返回
+		 * 设置位置 
+		 * @param x
+		 * @param y
 		 * 
 		 */
-		public function dispose():void
+		public function setPosition(x:Number,y:Number):ASQueryObject
 		{
 			all(function(item:DisplayObject):void
 			{
-				item.dispose();
-				//如果有父容器，从父容器移除自己
-				if(item.parent != null)
-				{
-					item.parent.removeChild(item);
-				}
+				item.x = x;
+				item.y = y;
 			});
-			//置空
-			_list = null;
-			_root = null;
-			_selector = null;
+			return this;
+		}
+		
+		/**
+		 * 改变位置 
+		 * @param x	x位置偏移
+		 * @param y y位置偏移
+		 * 
+		 */
+		public function addPosition(x:Number,y:Number):ASQueryObject
+		{
+			all(function(item:DisplayObject):void
+			{
+				item.x += x;
+				item.y += y;
+			});
+			return this;
+		}
+		
+		/**
+		 * 设置旋转角度
+		 * @param r
+		 * 
+		 */
+		public function setRotation(r:Number):ASQueryObject
+		{
+			all(function(item:DisplayObject):void
+			{
+				item.rotation = r;
+			});
+			return this;
 		}
 		
 		/**
@@ -611,6 +635,21 @@ package cx.asQuery.starling
 		}	
 		
 		/**
+		 * 缓动 
+		 * @param duration	持续时间
+		 * @param vars		缓动参数(参考starling.animation.Juggler::tween()方法的使用)
+		 * 
+		 */
+		public function tween(duration:Number, vars:Object):ASQueryObject
+		{
+			all(function(item:DisplayObject):void
+			{
+				Starling.juggler.tween(item,duration,vars);
+			});
+			return this;
+		}
+		
+		/**
 		 * 输出字符串 
 		 * @return 
 		 * 
@@ -625,6 +664,30 @@ package cx.asQuery.starling
 			}
 			itemStr = itemStr.substr(0,itemStr.length-1);
 			return "[AsQueryObject]\r selector:" + _selector + "\r root:" + _root + "\r " + itemStr;
+		}
+		
+		
+		/**
+		 * 清理所有资源，并释放
+		 * 注意：贴图和bitmapData不会自动释放，如果释放操作写在显示对象的dispose方法里面则会调用
+		 * 此方法无返回
+		 * 
+		 */
+		public function dispose():void
+		{
+			all(function(item:DisplayObject):void
+			{
+				item.dispose();
+				//如果有父容器，从父容器移除自己
+				if(item.parent != null)
+				{
+					item.parent.removeChild(item);
+				}
+			});
+			//置空
+			_list = null;
+			_root = null;
+			_selector = null;
 		}
 	}
 }
